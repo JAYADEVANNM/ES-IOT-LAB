@@ -1,0 +1,10 @@
+int temp_input=HAL_GPIO_ReadPin(GPIOC,GPIO_PIN_11);
+	  if(temp_input==0)
+	  {
+			  HAL_GPIO_WritePin(GPIOC,GPIO_PIN_10,GPIO_PIN_SET);
+	  }
+	  else
+	  {
+
+	 			  HAL_GPIO_WritePin(GPIOC,GPIO_PIN_10,GPIO_PIN_RESET);
+	  }

@@ -1,0 +1,58 @@
+  HAL_GPIO_WritePin(GPIOA,GPIO_PIN_5,GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(GPIOB,GPIO_PIN_13,GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(GPIOB,GPIO_PIN_14,GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(GPIOB,GPIO_PIN_15,GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(GPIOB,GPIO_PIN_1,GPIO_PIN_RESET);
+  while (1)
+  {
+   int R1,R2,R3,R4,R,C,ROW,val;
+   int PAT=0x08;
+   for(int i=0;i<4;i++)
+   {
+	HAL_GPIO_WritePin(GPIOC,GPIO_PIN_0,((~PAT)>>3)&0x1);
+	HAL_GPIO_WritePin(GPIOC,GPIO_PIN_1,((~PAT)>>2)&0x1);
+	HAL_GPIO_WritePin(GPIOC,GPIO_PIN_2,((~PAT)>>1)&0x1);
+	HAL_GPIO_WritePin(GPIOC,GPIO_PIN_3,((~PAT)>>0)&0x1);
+	PAT=PAT>>1;
+	R1=(!HAL_GPIO_ReadPin(GPIOC,GPIO_PIN_5))&0x1;
+	R2=(!HAL_GPIO_ReadPin(GPIOC,GPIO_PIN_6))&0x1;
+	R3=(!HAL_GPIO_ReadPin(GPIOC,GPIO_PIN_8))&0x1;
+	R4=(!HAL_GPIO_ReadPin(GPIOC,GPIO_PIN_9))&0x1;
+	ROW=(R1*8)|(R2*4)|(R3*2)|R4;
+	if(ROW==8)
+	{
+	 R=0;
+	 C=i;
+	 break;
+	}
+	else if(ROW==4)
+	{
+	 R=1;
+	 C=i;
+	 break;
+	}
+	else if(ROW==2)
+	{
+	 R=2;
+	 C=i;
+	 break;
+	}
+	else if(ROW==1)
+	{
+	 R=3;
+	 C=i;
+	 break;
+	}
+	else
+	{
+     R=0;C=0;
+	}
+   }
+   val=(R*4)+C;
+   HAL_GPIO_TogglePin(GPIOA,GPIO_PIN_5);
+   HAL_Delay(val*50);
+   HAL_GPIO_WritePin(GPIOB,GPIO_PIN_13,(val>>3)&0x1);
+   HAL_GPIO_WritePin(GPIOB,GPIO_PIN_14,(val>>2)&0x1);
+   HAL_GPIO_WritePin(GPIOB,GPIO_PIN_15,(val>>1)&0x1);
+   HAL_GPIO_WritePin(GPIOB,GPIO_PIN_1,(val>>0)&0x1);
+  }
