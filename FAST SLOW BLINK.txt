@@ -1,0 +1,35 @@
+
+void setup() {
+  // initialise pin 13 as output
+   pinMode(13,OUTPUT);
+   digitalWrite (13,LOW);
+}
+ 
+void loop(){
+        blink_fast();
+        blink_slow();
+}
+ 
+
+
+void blink_fast(){
+     // LED blinks for every half a second.
+      for (int count =1; count < 6; count++)
+      {
+        digitalWrite(13,HIGH);
+        delay(500);
+        digitalWrite(13,LOW);
+        delay(500);
+      }
+}
+
+void blink_slow(){
+   // LED blinks for every two seconds.
+       for (int count =1; count < 6; count++)
+      {
+        digitalWrite(13,HIGH);
+        delay(2000);
+        digitalWrite(13,LOW);
+        delay(2000);
+      }
+}
