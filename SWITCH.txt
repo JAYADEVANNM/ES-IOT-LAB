@@ -1,0 +1,31 @@
+void setup() {
+
+pinMode(4, INPUT);
+
+pinMode(13, OUTPUT);
+
+digitalWrite(13,LOW);
+
+
+}
+
+void loop() { 
+ 
+ int sw= digitalRead(4);
+
+ 
+if (sw== HIGH)
+{
+
+digitalWrite( 13, HIGH);   
+
+}
+
+ else
+
+{
+digitalWrite( 13, LOW); 
+                     
+}
+}
+
